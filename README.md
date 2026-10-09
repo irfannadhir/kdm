@@ -8,6 +8,7 @@ KDM mengambil alih download dari Chrome dan Edge, lalu mengunduh dengan banyak k
 - Scheduler: mulai dan berhenti pada jam tertentu, lalu shutdown/sleep/hibernate setelah semua selesai
 - Kategori otomatis ke subfolder (Video, Musik, Dokumen, Program, Arsip)
 - Tema gelap/terang, bahasa Indonesia/Inggris
+- Pembaruan dari dalam aplikasi: versi baru diunduh dan dipasang tanpa wizard
 
 ## Unduh
 
@@ -35,6 +36,9 @@ Panduan lengkap, termasuk cara memperbarui, menghapus, dan mengatasi masalah, ad
   ```powershell
   Get-FileHash .\kdm-1.0.0-setup.exe -Algorithm SHA256
   ```
+
+- Seperti unduhan browser, file yang diunduh KDM diberi tanda "dari internet" (Mark of the Web), jadi Windows SmartScreen tetap memeriksa program sebelum dijalankan dan Office membuka dokumen dalam Protected View.
+- Pembaruan dari dalam aplikasi hanya mengunduh installer dari halaman Releases ini lewat HTTPS, dan memasangnya hanya bila checksum-nya cocok dengan `SHA256SUMS.txt` rilis yang sama.
 
 ## Menghapus
 

@@ -1,47 +1,48 @@
-# KDM — Download Manager untuk Windows
+# KDM — Download Manager for Windows
 
-KDM mengambil alih download dari Chrome dan Edge, lalu mengunduh dengan banyak koneksi sekaligus supaya lebih cepat. Download bisa di-pause dan dilanjutkan kapan saja, termasuk setelah aplikasi ditutup atau PC restart.
+KDM takes over downloads from Chrome and Edge and fetches them over many connections at once, so they finish faster. Downloads can be paused and resumed at any time, even after the app is closed or the PC restarts.
 
-- Download multi-koneksi (default 8 koneksi per file) yang lanjut sendiri setelah internet putus
-- Pause/resume yang bertahan walau PC dimatikan
-- Antrean: 1–20 download berjalan sekaligus
-- Scheduler: mulai dan berhenti pada jam tertentu, lalu shutdown/sleep/hibernate setelah semua selesai
-- Kategori otomatis ke subfolder (Video, Musik, Dokumen, Program, Arsip)
-- Tema gelap/terang, bahasa Indonesia/Inggris
-- Pembaruan dari dalam aplikasi: versi baru diunduh dan dipasang tanpa wizard
+- Multi-connection downloads (8 connections per file by default) that resume by themselves after the internet drops
+- Pause/resume that survives turning the PC off
+- Queue: 1–20 downloads running at once
+- Scheduler: start and stop at set times, then shut down, sleep, or hibernate when everything is done
+- Automatic categories into subfolders (Video, Music, Documents, Programs, Archives)
+- Streaming video (HLS) saved as a single MP4, from a button on the video in the browser
+- Dark/light theme, Indonesian/English interface
+- Updates from inside the app: the new version is downloaded and installed without a wizard
 
-## Unduh
+## Download
 
-Ambil **`kdm-<versi>-setup.exe`** dari [Releases](https://github.com/irfannadhir/kdm/releases/latest).
+Get **`kdm-<version>-setup.exe`** from [Releases](https://github.com/irfannadhir/kdm/releases/latest).
 
-Ada juga `kdm-<versi>-windows-amd64.zip` untuk pemakaian portable atau pemasangan lewat skrip.
+There is also `kdm-<version>-windows-amd64.zip` for portable use or scripted installation.
 
-Kebutuhan: Windows 10 (21H2+) atau Windows 11 64-bit, WebView2 Runtime (sudah ada di Windows yang diperbarui), serta Chrome dan/atau Edge versi terbaru.
+Requirements: Windows 10 (21H2+) or Windows 11, 64-bit, the WebView2 Runtime (already on an updated Windows), and a current Chrome and/or Edge.
 
-## Pasang
+## Install
 
-1. Klik dua kali `kdm-<versi>-setup.exe` dan ikuti wizard-nya. Tidak perlu hak admin dan tidak ada prompt UAC: KDM dipasang untuk akun kamu sendiri di `%LOCALAPPDATA%\KDM`, terdaftar ke Chrome dan Edge, dan muncul di Start Menu serta di daftar aplikasi Windows.
+1. Double-click `kdm-<version>-setup.exe` and follow the wizard. No administrator rights and no UAC prompt are needed: KDM is installed for your own account in `%LOCALAPPDATA%\KDM`, registered with Chrome and Edge, and appears in the Start menu and in the Windows list of apps.
 
-2. Pasang ekstensinya sekali: buka `chrome://extensions` atau `edge://extensions`, aktifkan **Developer mode**, klik **Load unpacked**, lalu pilih `%LOCALAPPDATA%\KDM\extension` (halaman terakhir wizard punya tombol untuk membuka folder itu). Ekstensi belum ada di Chrome Web Store, jadi langkah ini belum bisa diotomatiskan.
+2. Install the browser extension once: open `chrome://extensions` or `edge://extensions`, turn on **Developer mode**, click **Load unpacked**, and pick `%LOCALAPPDATA%\KDM\extension` (the last page of the wizard has a button that opens that folder). The extension is not in the Chrome Web Store yet, so this step cannot be automated.
 
-3. Buka **KDM** dari Start Menu, lalu klik link download apa saja di browser. Dialog **Download baru** akan muncul di KDM.
+3. Open **KDM** from the Start menu, then click any download link in the browser. KDM shows its **New download** question.
 
-Panduan lengkap, termasuk cara memperbarui, menghapus, dan mengatasi masalah, ada di `INSTALL.md` di dalam zip.
+The full guide, including updating, uninstalling, and troubleshooting, is in `INSTALL.md` inside the zip.
 
-## Keamanan
+## Security
 
-- `kdm.exe` belum ditandatangani secara digital, jadi Windows SmartScreen mungkin memperingatkan. Pilih **More info → Run anyway** hanya bila berkasnya diunduh dari halaman Releases ini.
-- Cocokkan checksum berkas yang diunduh dengan `SHA256SUMS.txt` di halaman rilis:
+- `kdm.exe` is not digitally signed yet, so Windows SmartScreen may warn you. Choose **More info → Run anyway** only if you downloaded the file from this Releases page.
+- Compare the checksum of the downloaded file with `SHA256SUMS.txt` on the release page:
 
   ```powershell
   Get-FileHash .\kdm-1.0.0-setup.exe -Algorithm SHA256
   ```
 
-- Seperti unduhan browser, file yang diunduh KDM diberi tanda "dari internet" (Mark of the Web), jadi Windows SmartScreen tetap memeriksa program sebelum dijalankan dan Office membuka dokumen dalam Protected View.
-- Pembaruan dari dalam aplikasi hanya mengunduh installer dari halaman Releases ini lewat HTTPS, dan memasangnya hanya bila checksum-nya cocok dengan `SHA256SUMS.txt` rilis yang sama.
+- Like browser downloads, files downloaded by KDM are marked as coming from the internet (Mark of the Web), so Windows SmartScreen still checks programs before they run and Office opens documents in Protected View.
+- In-app updates only download the installer from this Releases page over HTTPS, and install it only when its checksum matches the `SHA256SUMS.txt` of the same release.
 
-## Menghapus
+## Uninstall
 
-**Settings → Apps → Installed apps → KDM → Uninstall** (atau cari "KDM" di Start Menu lalu pilih **Uninstall**). Lalu hapus ekstensi dari halaman ekstensi browser. Database dan log tetap ada di `%LOCALAPPDATA%\KDM` sampai folder itu dihapus.
+**Settings → Apps → Installed apps → KDM → Uninstall** (or search for "KDM" in the Start menu and choose **Uninstall**). Then remove the extension from the browser's extensions page. The database and logs stay in `%LOCALAPPDATA%\KDM` until you delete that folder.
 
-Untuk pemasangan portable: `powershell -ExecutionPolicy Bypass -File .\install.ps1 -Uninstall`.
+For a portable installation: `powershell -ExecutionPolicy Bypass -File .\install.ps1 -Uninstall`.
